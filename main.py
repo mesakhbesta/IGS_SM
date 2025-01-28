@@ -29,7 +29,7 @@ def login_instagram():
     username.clear()
     username.send_keys("smmagang1")
     password.clear()
-    password.send_keys("Arextiar2")
+    password.send_keys("lancarjaya")
 
     WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
     WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.XPATH, '//div[contains(text(), "Not now")]'))).click()
