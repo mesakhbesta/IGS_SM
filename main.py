@@ -39,7 +39,7 @@ def scrape_instagram_posts(account_name):
 
     data = []
     try:
-        for i in range(1):  # Ambil maksimal 3 postingan saja
+        for i in range(6):  # Ambil maksimal 3 postingan saja
             try:
                 post_divs = WebDriverWait(driver, 60).until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "_aagv"))
