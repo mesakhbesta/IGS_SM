@@ -42,4 +42,4 @@ jobs:
       # Run the scraper script
       - name: Run scraper
         run: |
-          python your_script.py
+          python main.py
