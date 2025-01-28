@@ -13,13 +13,10 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 def create_driver():
-    options = Options()
-    options.add_argument("--headless")  # Menjalankan di background
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    from selenium import webdriver
-    driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', options=options)
-
+    from selenium.webdriver import FirefoxOptions
+    opts = FirefoxOptions()
+    opts.add_argument("--headless")
+    driver = webdriver.Firefox(options=opts)
     return driver
 
 
