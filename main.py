@@ -28,16 +28,16 @@ def login_instagram():
     driver = st.session_state.driver
     driver.get("https://www.instagram.com")
 
-    username = WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='username']")))
-    password = WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='password']")))
+    username = WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='username']")))
+    password = WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='password']")))
 
     username.clear()
     username.send_keys("smmagang1")
     password.clear()
     password.send_keys("Arextiar11")
 
-    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
-    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.XPATH, '//div[contains(text(), "Not now")]'))).click()
+    WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
+    WebDriverWait(driver, 200).until(EC.element_to_be_clickable((By.XPATH, '//div[contains(text(), "Not now")]'))).click()
 
 def scrape_instagram_posts(account_name):
     driver = st.session_state.driver
@@ -47,7 +47,7 @@ def scrape_instagram_posts(account_name):
     try:
         for i in range(6):  # Ambil maksimal 3 postingan saja
             try:
-                post_divs = WebDriverWait(driver, 60).until(
+                post_divs = WebDriverWait(driver, 200).until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "_aagv"))
                 )
 
@@ -56,11 +56,11 @@ def scrape_instagram_posts(account_name):
                 driver.execute_script("arguments[0].click();", post_div)
                 time.sleep(2)
 
-                caption = WebDriverWait(driver, 60).until(
+                caption = WebDriverWait(driver, 200).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "h1._ap3a._aaco._aacu._aacx._aad7._aade"))
                 ).text
 
-                time_element = WebDriverWait(driver, 60).until(
+                time_element = WebDriverWait(driver, 200).until(
                     EC.presence_of_element_located((By.TAG_NAME, "time"))
                 )
                 post_time = time_element.get_attribute("datetime")
