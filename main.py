@@ -7,14 +7,22 @@ from selenium.webdriver.firefox.options import Options
 from datetime import datetime
 import time
 
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+
 def create_driver():
     opts = Options()
-    opts.headless = True  # Menjalankan tanpa antarmuka grafis (headless)
-    opts.add_argument('--no-sandbox')  # Beberapa sistem mungkin memerlukan ini
-    opts.add_argument('--disable-dev-shm-usage')  # Untuk mencegah masalah dengan shared memory
+    opts.headless = True  # Aktifkan mode headless
+    opts.add_argument('--no-sandbox')
+    opts.add_argument('--disable-dev-shm-usage')
+    opts.add_argument('--disable-gpu')
+    opts.add_argument('--disable-infobars')
+    opts.add_argument('--disable-extensions')
+
+    # Pastikan driver bisa dijalankan headless di cloud
     driver = webdriver.Firefox(options=opts)
     return driver
-    
+
 def quit_driver():
     if "driver" in st.session_state and st.session_state.driver is not None:
         st.session_state.driver.quit()
