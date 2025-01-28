@@ -9,10 +9,12 @@ import time
 
 def create_driver():
     opts = Options()
-    opts.add_argument("--headless")
+    opts.headless = True  # Menjalankan tanpa antarmuka grafis (headless)
+    opts.add_argument('--no-sandbox')  # Beberapa sistem mungkin memerlukan ini
+    opts.add_argument('--disable-dev-shm-usage')  # Untuk mencegah masalah dengan shared memory
     driver = webdriver.Firefox(options=opts)
     return driver
-
+    
 def quit_driver():
     if "driver" in st.session_state and st.session_state.driver is not None:
         st.session_state.driver.quit()
