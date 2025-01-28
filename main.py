@@ -6,42 +6,27 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from datetime import datetime
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-import os
-from selenium.webdriver.chrome.service import Service
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import os
-
-
-from selenium.webdriver.chrome.service import Service
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import os
 
 def create_driver():
-    options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("user-agent=Mozilla/5.0")
+    
+    from selenium import webdriver
+    from selenium.webdriver import FirefoxOptions
+    opts = FirefoxOptions()
+    opts.add_argument("--headless")
+    driver = webdriver.Firefox(options=opts)
 
-    chromedriver_path = os.path.join(os.getcwd(), 'chromedriver.exe')
-    service = Service(chromedriver_path)  # Membuat objek Service
-
-    driver = webdriver.Chrome(service=service, options=options)  # Menggunakan Service
     return driver
-
-
 
 def quit_driver():
     if "driver" in st.session_state and st.session_state.driver is not None:
         st.session_state.driver.quit()
         st.session_state.driver = None
-
 
 def login_instagram():
     driver = st.session_state.driver
