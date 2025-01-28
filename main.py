@@ -18,24 +18,30 @@ from selenium.webdriver.chrome.options import Options
 import os
 
 
+from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import os
+
 def create_driver():
- 
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    
-    # Path langsung ke chromedriver.exe yang ada di root directory
+
     chromedriver_path = os.path.join(os.getcwd(), 'chromedriver.exe')
-    
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    service = Service(chromedriver_path)  # Membuat objek Service
+
+    driver = webdriver.Chrome(service=service, options=options)  # Menggunakan Service
     return driver
+
 
 
 def quit_driver():
     if "driver" in st.session_state and st.session_state.driver is not None:
         st.session_state.driver.quit()
         st.session_state.driver = None
+
 
 def login_instagram():
     driver = st.session_state.driver
