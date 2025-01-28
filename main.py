@@ -13,10 +13,16 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 def create_driver():
-    from selenium.webdriver import FirefoxOptions
-    opts = FirefoxOptions()
-    opts.add_argument("--headless")
-    driver = webdriver.Firefox(options=opts)
+ 
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    
+    # Path langsung ke chromedriver.exe yang ada di root directory
+    chromedriver_path = os.path.join(os.getcwd(), 'chromedriver.exe')
+    
+    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
     return driver
 
 
